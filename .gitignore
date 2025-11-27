@@ -1,0 +1,17 @@
+# Environments
+venv/
+.env
+
+# Python bytecode cache
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Test / type-check caches
+.pytest_cache/
+.mypy_cache/
+
+# IDEs and editors
+.vscode/
