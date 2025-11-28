@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-11-27 23:55+0100\n"
-"PO-Revision-Date: 2025-11-27 23:57+0100\n"
+"POT-Creation-Date: 2025-11-28 21:21+0100\n"
+"PO-Revision-Date: 2025-11-28 21:21+0100\n"
 "Last-Translator: \n"
 "Language-Team: uk <LL@li.org>\n"
 "Language: uk\n"
@@ -20,12 +20,30 @@ msgstr ""
 "Generated-By: Babel 2.17.0\n"
 "X-Generator: Poedit 3.8\n"
 
-#: src/handlers/default.py:11
+#: src/handlers/default.py:14
 #, python-brace-format
-msgid "Hi, {name}!"
-msgstr "Привіт, {name}!"
+msgid ""
+"Hello! This bot is private. You are not allowed to use it. Consider "
+"deploying it on your own machine. <a href='https://github.com/RoLO0u/"
+"reels-mp4'>GitHub Link</a> to an open source project. Your user ID is "
+"<b>{user_id}</b>."
+msgstr ""
+"Привіт! Цей бот є приватним. Ви не маєте права ним користуватися. "
+"Розгляньте можливість його встановлення на власному комп'ютері. <a "
+"href='https://github.com/RoLO0u/reels-mp4'>GitHub Посилання</a> на "
+"проект з відкритим кодом. Ваш ідентифікатор користувача — <b>{user_id}</"
+"b>."
 
-#: src/handlers/default.py:17
+#: src/handlers/default.py:22
+#, python-brace-format
+msgid ""
+"Hi, <b>{name}</b>! Put a link of an instagram reel and I will turn it "
+"into an mp4 file for you."
+msgstr ""
+"Привіт, <b>{name}</b>! Постав посилання на Instagram-рел, і я перетворю "
+"його на файл mp4 для тебе."
+
+#: src/handlers/default.py:30
 msgid ""
 "This bot is open source and you can use it for yourself by configuring "
 "it and deploying it on your machine"
@@ -33,3 +51,6 @@ msgstr ""
 "Цей бот є відкритим програмним забезпеченням, і ви можете "
 "використовувати його для себе, налаштувавши та розгорнувши на своєму "
 "комп'ютері."
+
+#~ msgid "Hi, {name}!"
+#~ msgstr "Привіт, {name}!"

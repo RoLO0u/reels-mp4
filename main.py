@@ -1,11 +1,12 @@
-import logging
 import dotenv
+dotenv.load_dotenv(override=True)
+
+import logging
 
 from src import const
 from src import bot
 
 def main() -> None:
-  dotenv.load_dotenv()
   logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     level=const.DEBUG,

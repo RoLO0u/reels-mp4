@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-11-27 23:55+0100\n"
+"POT-Creation-Date: 2025-11-28 21:21+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,12 +17,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.17.0\n"
 
-#: src/handlers/default.py:11
+#: src/handlers/default.py:14
 #, python-brace-format
-msgid "Hi, {name}!"
+msgid ""
+"Hello! This bot is private. You are not allowed to use it. Consider "
+"deploying it on your own machine. <a href='https://github.com/RoLO0u"
+"/reels-mp4'>GitHub Link</a> to an open source project. Your user ID is "
+"<b>{user_id}</b>."
 msgstr ""
 
-#: src/handlers/default.py:17
+#: src/handlers/default.py:22
+#, python-brace-format
+msgid ""
+"Hi, <b>{name}</b>! Put a link of an instagram reel and I will turn it "
+"into an mp4 file for you."
+msgstr ""
+
+#: src/handlers/default.py:30
 msgid ""
 "This bot is open source and you can use it for yourself by configuring it"
 " and deploying it on your machine"
