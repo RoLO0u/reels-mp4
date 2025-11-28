@@ -9,7 +9,7 @@ from src import bot
 def main() -> None:
   logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-    level=const.DEBUG,
+    level=const.LOG_LEVEL,
   )
   bot.run(const.BOT_TOKEN)
 
