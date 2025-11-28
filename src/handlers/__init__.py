@@ -1,7 +1,8 @@
 from src.handlers import (
-  default
+  default, download
 )
 
 routers = (
   default.router,
+  download.router,
 )
