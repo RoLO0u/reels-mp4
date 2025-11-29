@@ -11,7 +11,7 @@ Telegram inline bot that turns any Instagram Reel link into a shareable MP4 vide
 ## Requirements
 - Python 3.11+
 - Telegram Bot API token created via [@BotFather](https://t.me/BotFather).
-- Instagram reels must be accessible to the Instaloader session. Provide Instagram credentials in `.env` if you need to fetch private reels you can normally view.
+- Instagram reels must be accessible to the Instaloader session. Provide Instagram credentials or a saved session file in `.env` to fetch private reels you can normally view.
 
 ## Quick Start
 1. **Clone and enter the project**
@@ -39,20 +39,27 @@ Telegram inline bot that turns any Instagram Reel link into a shareable MP4 vide
 | Variable | Required | Default | Description |
 | --- | --- | --- | --- |
 | `BOT_TOKEN` | ✅ | – | Telegram bot token. Without it the bot will refuse to start. |
-| `DEBUG` | ❌ | `True` | Enables verbose logging. Set `DEBUG="False"` (keep the quotes) for quieter logs in production. |
-| `USERNAME` | ❌ | – | Instagram username used by Instaloader. Required only when authenticating for private reels or higher rate limits. |
-| `PASSWORD` | ❌ | – | Instagram password paired with `USERNAME`. |
-| `SHORTCODE_LENGTH` | ❌ | `11` | Length of the Instagram Reel shortcode; override only if Meta changes their format. |
+| `DEBUG` | ❌ | `"True"` | Controls log verbosity. Keep only one `DEBUG` line active: `"True"` for info-level output or `"False"` for warning-level output. |
+| `USERNAME` | ✅ | – | Instagram username used by Instaloader for both password and session-file authentication. |
+| `FROM_SESSION_FILE` | ❌ | – | Absolute or relative path to an Instaloader session file. When set, Instaloader loads cookies from that file and skips password login. |
+| `PASSWORD` | ❌ | – | Instagram password paired with `USERNAME`. Used only when `FROM_SESSION_FILE` is empty. |
 
 Example `.env`:
 
 ```ini
-BOT_TOKEN="1234567890:ABCDEF_bot_token_from_botfather"
-DEBUG="True"     # set to "False" for warning-level logs
+BOT_TOKEN="@BotFather"
+
+# Logging (keep the line you need)
+DEBUG="True"  # Info level
+DEBUG="False" # Warning level
+
 USERNAME="instagram_username"
+FROM_SESSION_FILE="path/to/sessionfile"
+# if FROM_SESSION_FILE is set, PASSWORD will be ignored
 PASSWORD="instagram_password"
-SHORTCODE_LENGTH=11
 ```
+
+> Instaloader requires authentication for every download in this project. Either provide `USERNAME` + `PASSWORD` or keep an authenticated session file (recommended) and point `FROM_SESSION_FILE` to it.
 
 ## Running the bot
 ```bash
