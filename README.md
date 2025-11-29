@@ -11,7 +11,7 @@ Telegram inline bot that turns any Instagram Reel link into a shareable MP4 vide
 ## Requirements
 - Python 3.11+
 - Telegram Bot API token created via [@BotFather](https://t.me/BotFather).
-- Instagram reels must be accessible without login; private reels cannot be fetched by Instaloader.
+- Instagram reels must be accessible to the Instaloader session. Provide Instagram credentials in `.env` if you need to fetch private reels you can normally view.
 
 ## Quick Start
 1. **Clone and enter the project**
@@ -28,25 +28,29 @@ Telegram inline bot that turns any Instagram Reel link into a shareable MP4 vide
 	```bash
 	pip install -r requirements.txt
 	```
-4. **Create a `.env` file** (see the configuration section) and run:
+4. **Copy `.env.example` to `.env`** (edit the values per the configuration section) and run:
 	```bash
 	python main.py
 	```
 
 ## Configuration
-`python-dotenv` loads environment variables from a local `.env` file. The available options are:
+`python-dotenv` loads environment variables from `.env` (seed it by copying `.env.example`). The available options are:
 
 | Variable | Required | Default | Description |
 | --- | --- | --- | --- |
 | `BOT_TOKEN` | ✅ | – | Telegram bot token. Without it the bot will refuse to start. |
-| `DEBUG` | ❌ | `True` | Enables verbose logging. Set to `False` for quieter logs in production. |
+| `DEBUG` | ❌ | `True` | Enables verbose logging. Set `DEBUG="False"` (keep the quotes) for quieter logs in production. |
+| `USERNAME` | ❌ | – | Instagram username used by Instaloader. Required only when authenticating for private reels or higher rate limits. |
+| `PASSWORD` | ❌ | – | Instagram password paired with `USERNAME`. |
 | `SHORTCODE_LENGTH` | ❌ | `11` | Length of the Instagram Reel shortcode; override only if Meta changes their format. |
 
 Example `.env`:
 
 ```ini
-BOT_TOKEN=1234567890:ABCDEF_bot_token_from_botfather
-DEBUG=True
+BOT_TOKEN="1234567890:ABCDEF_bot_token_from_botfather"
+DEBUG="True"     # set to "False" for warning-level logs
+USERNAME="instagram_username"
+PASSWORD="instagram_password"
 SHORTCODE_LENGTH=11
 ```
 

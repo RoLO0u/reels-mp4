@@ -1,6 +1,6 @@
-import instaloader
 from instaloader import Post
 
+from src.const import L
+
 def download(shortcode: str) -> Post:
-  L = instaloader.Instaloader()
   return Post.from_shortcode(L.context, shortcode)  
