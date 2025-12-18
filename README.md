@@ -43,6 +43,9 @@ Telegram inline bot that turns any Instagram Reel link into a shareable MP4 vide
 | `USERNAME` | ✅ | – | Instagram username used by Instaloader for both password and session-file authentication. |
 | `FROM_SESSION_FILE` | ❌ | – | Absolute or relative path to an Instaloader session file. When set, Instaloader loads cookies from that file and skips password login. |
 | `PASSWORD` | ❌ | – | Instagram password paired with `USERNAME`. Used only when `FROM_SESSION_FILE` is empty. |
+| `TEST_URL` | ❌ | `https://ipv4.icanhazip.com` | Used only by local scripts to verify proxy connectivity. |
+| `PROXY` | ❌ | – | Proxy address for Instaloader HTTP requests (either `host:port` or full URL like `http://host:port`). |
+| `PROXY_AUTH` | ❌ | – | Proxy credentials in `user:pass` form. |
 
 Example `.env`:
 
@@ -57,6 +60,11 @@ USERNAME="instagram_username"
 FROM_SESSION_FILE="path/to/sessionfile"
 # if FROM_SESSION_FILE is set, PASSWORD will be ignored
 PASSWORD="instagram_password"
+
+# Optional proxy (applied to Instaloader requests)
+TEST_URL="https://ipv4.icanhazip.com"
+PROXY="host:port"
+PROXY_AUTH="user:pass"
 ```
 
 > Instaloader requires authentication for every download in this project. Either provide `USERNAME` + `PASSWORD` or keep an authenticated session file (recommended) and point `FROM_SESSION_FILE` to it.
