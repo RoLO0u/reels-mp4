@@ -93,7 +93,7 @@ Translations live under `locales/<language>/LC_MESSAGES/messages.po`. To add a n
 - **Rate limits or 429 errors** – Instaloader is scraping Instagram without authentication. Heavy use may trigger throttling; consider adding caching or rotating IPs.
 
 ## Contributing
-Bug reports, feature ideas, and pull requests are welcome. Please open an issue describing the change you have in mind before submitting large feature work.
+Made mostly by AI (Google Antigravity)
 
 ## License
 Distributed under the MIT License. See `LICENSE` for details.
