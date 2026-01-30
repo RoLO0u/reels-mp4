@@ -29,13 +29,19 @@ def download(shortcode: str) -> CffiPost:
     # Let's create a CLEAN session and copy cookies, mirroring custom_download.py success.
     from curl_cffi import requests
     
-    session = requests.Session(impersonate="chrome110")
-    
-    # Copy proxy
+    # Extract proxies from Instaloader session
+    proxies = None
     if L.context._session.proxies:
         print(f"DEBUG: Copying proxies: {L.context._session.proxies}")
-        session.proxies.update(L.context._session.proxies) # pyright: ignore[reportCallIssue, reportArgumentType]
-        
+        proxies = L.context._session.proxies
+    
+    # Initialize Session with proxies and impersonation
+    # IMPROTANT: Do not manually set User-Agent header, let impersonate handle it to match TLS fingerprint.
+    session = requests.Session(
+        impersonate="chrome110",
+        proxies=proxies # pyright: ignore[reportArgumentType]
+    )
+    
     # Manually load cookies from session file to avoid Instaloader/Patch issues
     from src.const import FROM_SESSION_FILE
     import pickle
@@ -76,8 +82,6 @@ def download(shortcode: str) -> CffiPost:
     else:
         print("DEBUG: No session file found or configured.")
 
-    # Set User Agent manually to match what we verified
-    session.headers["User-Agent"] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
     
     # Hardcoded doc_id for Post query (same as Instaloader uses)
     DOC_ID = "8845758582119845"

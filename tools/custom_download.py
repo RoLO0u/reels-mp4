@@ -54,10 +54,16 @@ def main():
         print(f"Using Proxy: {PROXY}")
 
     # Initialize Session
-    s = requests.Session()
+    s = requests.Session(proxies=proxies)
     s.impersonate = "chrome110"
-    s.proxies = proxies
-    s.headers["User-Agent"] = USER_AGENT
+    # s.headers["User-Agent"] = USER_AGENT # Don't override UA when using impersonate!
+
+    # Check IP
+    try:
+        ip_resp = s.get("https://api.ipify.org?format=json", timeout=10)
+        print(f"Current IP: {ip_resp.json()['ip']}")
+    except Exception as e:
+        print(f"Failed to check IP: {e}")
 
     # Load Cookies
     # Note: Instaloader's pickle structure is specific. 
