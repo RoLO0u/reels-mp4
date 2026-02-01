@@ -1,4 +1,5 @@
 import json
+import re
 from dataclasses import dataclass
 from typing import Optional
 from src.const import L
@@ -13,7 +14,7 @@ class CffiPost:
     video_view_count: int
     likes: int
 
-def download(shortcode: str) -> CffiPost:
+def download(shortcode: str) -> Optional[CffiPost]:
     import sys
     import os
     from src.const import FROM_SESSION_FILE
@@ -108,7 +109,42 @@ def download(shortcode: str) -> CffiPost:
          
     media = data['data'].get('shortcode_media') or data['data'].get('xdt_shortcode_media')
     if not media:
-         raise Exception(f"Media not found in JSON. Keys: {list(data['data'].keys())}")
+         print(f"DEBUG: Media not found in JSON. Keys: {list(data['data'].keys())}")
+         print("DEBUG: Attempting fallback to HTML scraping...")
+         
+         # Fallback: Scrape the public HTML page
+         # We can reuse the same session to benefit from potential cookies/fingerprint, 
+         # but normally public page works without auth too.
+         html_resp = session.get(
+             f"https://www.instagram.com/reel/{shortcode}/",
+             timeout=30
+         )
+         
+         if html_resp.status_code == 200:
+             html = html_resp.text
+             
+             # Regex extraction
+             video_url_match = re.search(r'<meta property="og:video" content="([^"]+)"', html)
+             image_url_match = re.search(r'<meta property="og:image" content="([^"]+)"', html)
+             desc_match = re.search(r'<meta property="og:description" content="([^"]+)"', html)
+             
+             video_url = video_url_match.group(1) if video_url_match else None
+             
+             if video_url:
+                 print("DEBUG: Fallback successful found video in HTML.")
+                 return CffiPost(
+                     video_url=video_url,
+                     url=image_url_match.group(1) if image_url_match else "",
+                     caption=desc_match.group(1) if desc_match else None,
+                     owner_username="unknown", # Hard to parse reliably without JSON
+                     video_view_count=0,
+                     likes=0
+                 )
+         
+         print("DEBUG: Fallback failed.")
+         with open("debug_fallback.html", "w") as f:
+             f.write(html)
+         return None
     
     # Extract Caption safely
     caption = None

@@ -17,7 +17,7 @@ async def inline_download(inline_query: types.InlineQuery) -> None:
   if len(shortcode) != const.SHORTCODE_LENGTH:
     return
   reel = reels.download(shortcode)
-  if not reel.video_url:
+  if not reel or not reel.video_url:
     return
   caption = reel.caption if reel.caption else "No caption"
   description = _("{caption}\n@{owner_username}\n{video_view_count} views, {likes} likes").format(
